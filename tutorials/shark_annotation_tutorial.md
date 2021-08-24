@@ -1,4 +1,4 @@
-<image src="../assets/shark_annotation.png">
+<img src="../assets/shark_annotation.png">
 
 # Shark images annotation using Python 🐍, Google Vision API and google-vision-wrapper 👁
 
