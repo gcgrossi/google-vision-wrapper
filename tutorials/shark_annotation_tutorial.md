@@ -1,7 +1,6 @@
 <img src="../assets/shark_annotation.png">
 
 # Shark images annotation using Python 🐍, Google Vision API and google-vision-wrapper 👁
-
 ### Problem statement 
 I am currently setting up a bounding box regression model to construct a shark detector, which will be able to correctly spot and classify different shark species in an image. I have about 2'000 shark images organized in this folder structure:
  
@@ -55,7 +54,7 @@ import pandas as pd
  
  ```
  
- the python package of ```google-vision-wrapper``` is ```gvision``` and from it we import the ```GVisionAPI``` class. We will need the other packages in the future. From here we proceed by writing some helper functions.
+the python package of ```google-vision-wrapper``` is ```gvision``` and from it we import the ```GVisionAPI``` class. We will need the other packages in the future. From here we proceed by writing some helper functions.
  
  #### Helper Functions
  
