@@ -31,9 +31,7 @@ Google Vision API is a service provided by Google, which enables to send a reque
  
  ```pip install google-vision-wrapper```
  
-The installation procedure can be found on the [project's Github page](https://github.com/gcgrossi/google-vision-wrapper), together with the links to properly setup the Google Vision API.
- 
- Once everything is setup, we can move on to the juicy part: Python.
+The installation procedure can be found on the [project's Github page](https://github.com/gcgrossi/google-vision-wrapper), together with the links to properly setup the Google Vision API. Once everything is setup, we can move on to the juicy part: Python.
  
  ### Python Script
  in the root directory I create a file named  ```annotate_images.py``` and start by importing.
