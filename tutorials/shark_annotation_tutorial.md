@@ -113,7 +113,7 @@ def add_annotation(annotation_csv,annotation_list):
  
  ```
  
-This function opens an input csv file and appends an input list (which should be correctly comma separated) to the existing file.
+This function opens an input csv file and appends an input list to the existing file.
  
 #### Main Function
 It's now time write the main function and let the magic begin:
@@ -204,4 +204,57 @@ if you print ```header``` you will notice that the components of ```objs``` are 
 6. bottom-left (x,y) coordinates of bounding box
 
 We therefore loop over the objects detected and check if it is an Animal or a Shark. If so we can draw a rectangle on the image using OpenCV and the top-left, bottom-right coordinates of the bounding box. We show the image with the rectangle on screen. Here is an example of what it looks like: 
- 
+
+<img src="example_shark_annotation.PNG">
+
+Now we are ready to perform an OpenCV magic to accept the annotation or reject it.
+
+```python
+    
+                while(1):
+                   
+                   # if keyword is 's' (save) ->
+                    # add annotation
+                    if cv2.waitKey(1) & 0xFF == ord('s'): 
+                        annotation_list = [name,label,int(obj[2][0]),int(obj[2][1]),int(obj[4][0]),int(obj[4][1])]
+                        add_annotation(annotation_csv,annotation_list)
+
+                        cv2.destroyAllWindows()
+                        break
+
+                    # if keyword is 'a' (abort) -> skip
+                    elif cv2.waitKey(1) & 0xFF == ord('a'): 
+                        cv2.destroyAllWindows()
+                        break
+
+                    # if keyword is 'e' (end) -> end
+                    elif cv2.waitKey(1) & 0xFF == ord('e'): 
+                        image_count=max_images
+                        cv2.destroyAllWindows()
+                        break
+                   
+        if image_count>=max_images: 
+            # save csv
+            break
+            
+    # enf of main function
+    return
+
+# call to main   
+if __name__ == "__main__":
+   main()
+
+```
+
+We start an infinite loop and we wait for a key to be pressed:
+
+- if we press 's' (for save): we build a list with the information we want to annotate and pass it to the add annotation helper function previously defined.
+- if we press 'a' (for abort): we skip the present annotation.
+- if we press 'e' (for exit): we set the image count to the maximum, so that we can exit the entire process when hitting the last conditional if.
+
+In this way we are able to manage and polish the annotations returned by the API, and retain only the ones you selected.
+
+### Final Result
+At the end you will have the csv file with your selected annotations as shown here:
+
+
