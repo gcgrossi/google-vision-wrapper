@@ -43,7 +43,6 @@ in the root directory I create a file named  ```annotate_images.py``` and start 
  
 import os
 import cv2
-import random
 
 import numpy as np
 import pandas as pd
@@ -114,7 +113,45 @@ def add_annotation(annotation_csv,annotation_list):
  
  ```
  
- This function opens an input csv file and appends an input list (which should be correctly comma separated) to the existing file.
+This function opens an input csv file and appends an input list (which should be correctly comma separated) to the existing file.
  
- 
+#### Main Function
+It's now time write the main function and let the magic begin:
+
+```python
+
+def main():
+    
+    # init path to files
+    cwd=os.getcwd()
+    dataset_path=os.path.join(cwd,"shark")
+    annotation_csv = os.path.join(dataset_path,"shark_annotation.csv")
+
+    # load annotation as pandas dataframe
+    # obtain the images that already annotated
+    df_annotation = load_annotation(annotation_csv)
+    annotated_images = df_annotation['image'].to_list()
+
+```
+
+we first of all construct the path to the annotation csv file on disk. After we load the file using the helper function we just constructed and we select the image filename column as a list. We will need it to understand if an image was already annotated or not.
+
+```python
+
+    # initialize google vision api
+    gvision_auth=os.path.join(cwd,"google_vision","gvision_auth.json")
+    gvis = GVisionAPI(gvision_auth)
+    
+    #obtain image paths
+    image_paths = list(list_files(dataset_path))
+
+    max_images = 1000
+    image_count = 0   
+
+```
+
+here we finally initialize a Google Vision Api client using [google-vision-wrapper](https://github.com/gcgrossi/google-vision-wrapper). I put the authorisation json file generated from my GCP account in a folder named ```google_vision``` and give it as an input to the ```GVisionAPI``` class.
+
+We then use the helper function ```list_files``` to generate a list of image paths. We also iniatialize a counter to handle a maximum image requests we want to process. This is very important since there is a **free tier cap of 1'000 annotation/month!**.
+
  
