@@ -154,4 +154,54 @@ here we finally initialize a Google Vision Api client using [google-vision-wrapp
 
 We then use the helper function ```list_files``` to generate a list of image paths. We also iniatialize a counter to handle a maximum image requests we want to process. This is very important since there is a **free tier cap of 1'000 annotation/month!**.
 
+```python
+    
+    # loop over image list
+    for i in image_paths:
+
+        # get image name and label from path
+        name = i.split(os.path.sep)[-1]
+        label = i.split(os.path.sep)[-2]
+        
+        # if already annotated -> skip image
+        if name in annotated_images: continue
+
+        #read the image
+        image = cv2.imread(i)
+        image_count+=1
+
+```
+
+We initiate a loop over the image path list and extract the file name and the label from it (rememeber that the label is the folder name in which the image resides). If the filename is already in the annotation list we skip it (there is probably a more efficient way of doing it, but we do not have so much performance constraints here). On the contrary, if we need to annotate the image, we read it and add a counter entry.
+
+```python
+    
+        #perform a request to the API
+        gvis.perform_request(image,'object detection')
+        headers,objs = gvis.objects()
+
+        # check if image contains a shark
+        for obj in objs: 
+            if obj[0] in ['Animal','Shark']:
+                
+                # draw the true rectangle
+                # and print class
+                cv2.rectangle(image,(int(obj[2][0]),int(obj[2][1])),(int(obj[4][0]),int(obj[4][1])),(0,255,0), 2)
+                print("{} - Class: {}".format(i,obj[0]))
+                cv2.imshow("tue", image)
+
+```
+
+After we have the image, we can finally perform a request via the [google-vision-wrapper](https://github.com/gcgrossi/google-vision-wrapper) ```.perform_request``` method with option ```object detection```. after that we retrieve two lists using the ```.objects``` method: first is a list of header that quilifies the information stored in ```objs``` components, while the second is a list, which components is the information of each object detected (stored in a sub-list).
+
+if you print ```header``` you will notice that the components of ```objs``` are lists, which elements are respectively:
+
+1. object name
+2. detection confidence
+3. top-left (x,y) coordinates of bounding box
+4. top-right (x,y) coordinates of bounding box
+5. bottom-right (x,y) coordinates of bounding box
+6. bottom-left (x,y) coordinates of bounding box
+
+We therefore loop over the objects detected and check if it is an Animal or a Shark. If so we can draw a rectangle on the image using OpenCV and the top-left, bottom-right coordinates of the bounding box. We show the image with the rectangle on screen. Here is an example of what it looks like: 
  
