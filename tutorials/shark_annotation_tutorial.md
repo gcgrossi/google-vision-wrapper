@@ -257,4 +257,8 @@ In this way we are able to manage and polish the annotations returned by the API
 ### Final Result
 At the end you will have the csv file with your selected annotations as shown here:
 
+<img src="annotation_result.png">
+
+The nice thing is that you can resume from where you left as the previous annotation will be skipped. Hope you enjoyed this small but practical tutorial and that you will have some benefit in using [google-vision-wrapper](https://github.com/gcgrossi/google-vision-wrapper) for your computer vision purposes!
+
 
