@@ -276,4 +276,4 @@ cv2.imwrite(os.path.join(os.getcwd(),'assets','output_dunkin.jpg'), output)
 And here we are! With a very few lines of code we were able to detect the logo associated with this box of donuts. I'm sorry, I should have written also something regarding Google Maps API and how to find the nearest to your place because writing this tutorial made me very very hungry! I will go and grab a coffee and a 12 box for my colleagues before starting my coding session!
 
 ## _'Hasta la ciambella, siempre!'_
-<img src="../assets/homer_donuts.png" width="30%">
+<img src="../assets/homer_donuts.png" width="50%">
