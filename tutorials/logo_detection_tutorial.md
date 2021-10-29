@@ -49,7 +49,7 @@ plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 ```
 
     
-![png](output_logo_detection_tutorial.png)
+![png](output_logo_detction_tutorial.png)
     
 
 
@@ -208,19 +208,6 @@ df_labels
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -282,7 +269,7 @@ cv2.imwrite(os.path.join(os.getcwd(),'assets','output_dunkin.jpg'), output)
 ```
 
     
-![png](output_logo_detection_tutorial.png)
+![png](output_logo_detection_tutorial_1.png)
     
 
 
